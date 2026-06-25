@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hth · 站点知识库</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f5f7fa;
+      color: #1f2937;
+      line-height: 1.7;
+    }
+    .page-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 深色头图 — 知识库主视觉 */
+    .hero {
+      background: linear-gradient(145deg, #0b1a2e 0%, #1a2f42 100%);
+      color: #e6edf5;
+      padding: 70px 20px 60px;
+      margin: 30px 0 50px;
+      border-radius: 32px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+      text-align: center;
+      position: relative;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .hero h1 span {
+      color: #7ab7f0;
+    }
+    .hero p {
+      max-width: 680px;
+      margin: 16px auto 0;
+      font-size: 1.15rem;
+      opacity: 0.85;
+      line-height: 1.6;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: #2c4d6b;
+      color: #c9e0f5;
+      padding: 4px 16px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      margin-top: 20px;
+    }
+
+    /* 布局：目录感 + 卡片说明区 */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 48px 0 20px;
+      padding-bottom: 8px;
+      border-bottom: 3px solid #d1dbe8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title i {
+      font-style: normal;
+      background: #1a2f42;
+      color: white;
+      border-radius: 24px;
+      padding: 0 14px;
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin: 16px 0 10px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s;
+      border: 1px solid #eaeef3;
+    }
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(0,20,40,0.08);
+    }
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #0f293e;
+    }
+    .card p {
+      color: #37475a;
+      font-size: 0.95rem;
+    }
+    .card .tag {
+      display: inline-block;
+      background: #edf2f9;
+      color: #1a3b55;
+      font-size: 0.75rem;
+      padding: 2px 12px;
+      border-radius: 30px;
+      margin-top: 10px;
+    }
+
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      background: white;
+      border-radius: 28px;
+      padding: 28px 32px;
+      margin: 32px 0 40px;
+      border: 1px solid #dce4ed;
+    }
+    .info-col {
+      flex: 1 1 200px;
+    }
+    .info-col strong {
+      display: block;
+      font-size: 1rem;
+      color: #102a3c;
+      margin-bottom: 6px;
+    }
+    .info-col p {
+      color: #3d5369;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* 提示区 */
+    .notice {
+      background: #e9f0f9;
+      border-left: 5px solid #4d7db3;
+      padding: 22px 28px;
+      border-radius: 20px;
+      margin: 30px 0;
+      color: #1f3854;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 12px 20px;
+    }
+    .notice .symbol {
+      font-size: 2rem;
+      line-height: 1;
+      color: #2c6a9e;
+    }
+    .notice .content {
+      flex: 1;
+    }
+    .notice .content p {
+      margin-bottom: 6px;
+    }
+
+    .faq-mini {
+      background: white;
+      border-radius: 28px;
+      padding: 26px 32px;
+      margin: 40px 0 50px;
+      border: 1px solid #e2eaf2;
+    }
+    .faq-item {
+      padding: 14px 0;
+      border-bottom: 1px solid #eef3f8;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      font-weight: 600;
+      color: #0b2a40;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .faq-q::before {
+      content: "Q";
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: #dce6f0;
+      color: #1d3a56;
+      padding: 0 10px;
+      border-radius: 30px;
+      line-height: 1.6;
+    }
+    .faq-a {
+      color: #3b536b;
+      padding-left: 32px;
+      font-size: 0.95rem;
+    }
+    .faq-a a {
+      color: #25639c;
+      text-decoration: none;
+      border-bottom: 1px dotted #94b7da;
+    }
+    .faq-a a:hover {
+      border-bottom-style: solid;
+    }
+
+    /* 强调色链接默认 */
+    a {
+      color: #1b6bb0;
+      text-decoration: none;
+      transition: 0.15s;
+    }
+    a:hover {
+      color: #0e4a7a;
+      text-decoration: underline;
+    }
+
+    .footer-note {
+      text-align: center;
+      padding: 30px 10px 40px;
+      color: #6f7d8c;
+      font-size: 0.9rem;
+      border-top: 1px solid #dde5ed;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero { padding: 50px 16px 40px; }
+      .info-row { padding: 20px 18px; }
+      .faq-mini { padding: 18px 18px; }
+      .notice { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- 深色头图 -->
+  <header class="hero">
+    <h1>📚 <span>hth</span> 知识库</h1>
+    <p>围绕站点定位与信息可信度的简明索引 —— 不是门户，而是一份可查阅的背景说明与指引。</p>
+    <span class="badge">✦ 持续修订 · 内容参考</span>
+  </header>
+
+  <!-- 介绍 · 目录感卡片 -->
+  <div class="section-title">
+    📖 站点介绍
+    <i>背景</i>
+  </div>
+  <div class="grid-3">
+    <div class="card">
+      <h3>关于 hth</h3>
+      <p>「<a href="https://china1-huatihui.com">hth</a>」是一个面向特定信息整合场景的站点，目前保持稳定的内容服务结构。本页作为知识库入口，提供站点背景与常见参考。</p>
+      <span class="tag">标识 · 可信说明</span>
+    </div>
+    <div class="card">
+      <h3>内容范围</h3>
+      <p>站点主要聚焦于主题资讯、指南说明与相关摘要。不涉及金融建议、医疗声明或任何形式的承诺保证，仅作为参考索引存在。</p>
+      <span class="tag">信息参考</span>
+    </div>
+    <div class="card">
+      <h3>访问说明</h3>
+      <p>所有页面均通过 <a href="https://china1-huatihui.com">hth</a> 直接访问，无需额外软件或注册。建议使用主流浏览器获得完整显示效果。</p>
+      <span class="tag">通用适配</span>
+    </div>
+  </div>
+
+  <!-- 可信说明 + 相关信息区 (一行两列) -->
+  <div class="section-title">
+    🧾 可信说明
+    <i>原则</i>
+  </div>
+  <div class="info-row">
+    <div class="info-col">
+      <strong>◈ 信息来源</strong>
+      <p>站内内容汇编自公开资料与经过核对的行业信息，不包含内幕或非公开数据。每篇文章均保留原始参考语境。</p>
+    </div>
+    <div class="info-col">
+      <strong>◈ 更新节奏</strong>
+      <p>内容根据实际情况进行修订，不承诺固定周期。重大调整会在页面内标注日期，方便回溯。</p>
+    </div>
+    <div class="info-col">
+      <strong>◈ 立场</strong>
+      <p>站点不隶属于任何商业机构，也不为第三方导流。所有外链均标注来源，不设隐藏跳转。</p>
+    </div>
+  </div>
+
+  <!-- 提示区 -->
+  <div class="notice">
+    <div class="symbol">ⓘ</div>
+    <div class="content">
+      <p><strong>提示：</strong>若你需要直接查阅站点内容，推荐从主页导航或搜索功能进入具体分类。本知识库仅列举框架性说明，并非完整站点地图。</p>
+      <p style="margin-top: 6px;">另请注意，站点域名 <strong>china1-huatihui.com</strong> 是当前唯一访问地址，其他变体或镜像均非本站维护。</p>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要区 -->
+  <div class="section-title">
+    ❓ 常见疑问摘要
+    <i>FAQ</i>
+  </div>
+  <div class="faq-mini">
+    <div class="faq-item">
+      <div class="faq-q">如何确认我访问的是官方站点？</div>
+      <div class="faq-a">请核对浏览器地址栏域名是否为 <strong>china1-huatihui.com</strong>，并留意页面底部标识。所有内容均通过 <a href="https://china1-huatihui.com">hth</a> 发布。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">站点是否收集个人数据？</div>
+      <div class="faq-a">本站不设置用户注册、评论或追踪脚本。服务器会记录匿名访问日志（如浏览器类型、页面路径），仅用于基础运维分析，不对外共享。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">内容可以转载吗？</div>
+      <div class="faq-a">非商业性引用或摘要性转发请注明出处（<a href="https://china1-huatihui.com">hth</a>）。全文重新发布或用于商业场景请提前联络确认。</div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer-note">
+    <a href="https://china1-huatihui.com">hth</a> · 知识库索引页 · 内容仅供参考
+  </div>
+
+</div>
+</body>
+</html>
